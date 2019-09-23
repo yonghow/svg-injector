@@ -4,7 +4,7 @@ import { processRequestQueue, queueRequest } from './request-queue'
 import svgCache from './svg-cache'
 import { Errback } from './types'
 
-const loadSvg = (url: string, callback: Errback) => {
+const loadSvg = (url: string, withCredentials: boolean, callback: Errback) => {
   if (svgCache.has(url)) {
     const cacheValue = svgCache.get(url)
 
@@ -31,6 +31,8 @@ const loadSvg = (url: string, callback: Errback) => {
   queueRequest(url, callback)
 
   const httpRequest = new XMLHttpRequest()
+
+  httpRequest.withCredentials = withCredentials
 
   httpRequest.onreadystatechange = () => {
     try {

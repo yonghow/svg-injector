@@ -14,6 +14,7 @@ const injectElement = (
   evalScripts: EvalScripts,
   renumerateIRIElements: boolean,
   beforeEach: BeforeEach,
+  withCredentials: boolean,
   callback: Errback
 ) => {
   const imgUrl = el.getAttribute('data-src') || el.getAttribute('src')
@@ -47,7 +48,7 @@ const injectElement = (
   // Try to avoid loading the orginal image src if possible.
   el.setAttribute('src', '')
 
-  loadSvg(imgUrl, (error, svg) => {
+  loadSvg(imgUrl, withCredentials, (error, svg) => {
     /* istanbul ignore else */
     if (!svg) {
       // TODO: Extract.

@@ -9,6 +9,7 @@ interface OptionalArgs {
   beforeEach?: BeforeEach
   evalScripts?: EvalScripts
   renumerateIRIElements?: boolean
+  withCredentials?: boolean
 }
 
 const SVGInjector = (
@@ -18,7 +19,8 @@ const SVGInjector = (
     afterEach = () => undefined,
     beforeEach = () => undefined,
     evalScripts = EvalScripts.Never,
-    renumerateIRIElements = true
+    renumerateIRIElements = true,
+    withCredentials = false,
   }: OptionalArgs = {}
 ) => {
   if (elements && 'length' in elements) {
@@ -29,6 +31,7 @@ const SVGInjector = (
         evalScripts,
         renumerateIRIElements,
         beforeEach,
+        withCredentials,
         (error, svg) => {
           afterEach(error, svg)
           if (
@@ -47,6 +50,7 @@ const SVGInjector = (
       evalScripts,
       renumerateIRIElements,
       beforeEach,
+      withCredentials,
       (error, svg) => {
         afterEach(error, svg)
         afterAll(1)
